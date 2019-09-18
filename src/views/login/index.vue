@@ -31,15 +31,15 @@
 </template>
 
 <script>
-import request from '@/utils/request'
+import { login } from '@/api/user'
 
 export default {
   name: 'LoginIndex',
   data () {
     return {
       user: {
-        mobile: '',
-        code: ''
+        mobile: '15201230123',
+        code: '246810'
       }
     }
   },
@@ -48,14 +48,16 @@ export default {
     async onLogin () {
       // 获取表单数据
       // 发送请求
-      const { data } = await request({
-        method: 'POST',
-        url: '/app/v1_0/authorizations',
-        data: this.user
-      })
+      try {
+        const { data } = await login(this.user)
 
-      console.log(data)
-      // 根据结果进行后续处理
+        console.log(data)
+        this.$toast.success('登录成功')
+      } catch (err) {
+        if (err.response && err.response.status === 400) {
+          this.$toast.fail('登录失败，手机号或验证码错误')
+        }
+      }
     }
   }
 }
