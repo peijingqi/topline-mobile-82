@@ -22,7 +22,7 @@
     </van-cell-group>
     <!-- /登录表单 -->
     <!-- 登录按钮 -->
-    <div>
+    <div class="login-wrap">
       <van-button type="info">登录</van-button>
     </div>
   </div>
@@ -34,6 +34,13 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.login {
+  .login-wrap {
+    padding: 20px;
+    .van-button {
+      width: 100%;
+    }
+  }
+}
 </style>
