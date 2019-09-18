@@ -25,8 +25,9 @@
     <!-- /登录表单 -->
     <!-- 登录按钮 -->
     <div class="login-wrap">
-      <van-button type="info" @click="onLogin">登录</van-button>
+      <van-button type="info" :loading="isLoginLoading" @click="onLogin">登录</van-button>
     </div>
+    <!-- /登录按钮 -->
   </div>
 </template>
 
@@ -40,12 +41,14 @@ export default {
       user: {
         mobile: '15201230123',
         code: '246810'
-      }
+      },
+      isLoginLoading: false // 控制登录按钮的 loading 状态
     }
   },
 
   methods: {
     async onLogin () {
+      this.isLoginLoading = true
       // 获取表单数据
       // 发送请求
       try {
@@ -55,9 +58,12 @@ export default {
         this.$toast.success('登录成功')
       } catch (err) {
         if (err.response && err.response.status === 400) {
-          this.$toast.fail('登录失败，手机号或验证码错误')
+          this.$toast.fail('手机号或验证码错误')
         }
       }
+
+      // 无论登录成功与否，都停止 loading
+      this.isLoginLoading = false
     }
   }
 }
