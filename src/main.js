@@ -7,13 +7,17 @@ import store from './store'
 import {
   Button,
   Cell,
-  CellGroup
+  CellGroup,
+  NavBar,
+  Field
 } from 'vant'
 
 Vue
   .use(Button)
   .use(Cell)
   .use(CellGroup)
+  .use(NavBar)
+  .use(Field)
 
 Vue.config.productionTip = false
 
